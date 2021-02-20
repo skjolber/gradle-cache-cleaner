@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.skjolber.gradle-cache-cleaner</groupId>
+	<artifactId>core</artifactId>
+	<name>Gradle cache cleaner</name>
+	<description>Clean Gradle caches</description>
+	<version>1.0.0-SNAPSHOT</version>
+	<url>https://github.com/skjolber/gradle-cache-cleaner</url>
+
+	<organization>
+		<name>Media Skjolberg</name>
+		<url>https://skjolber.github.io</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Thomas Skjølberg</name>
+			<email>thomas.skjolberg@gmail.com</email>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git@github.com:skjolber/gradle-cache-cleaner.git</connection>
+		<developerConnection>scm:git:git@github.com:skjolber/gradle-cache-cleaner.git</developerConnection>
+		<url>git@github.com:skjolber/gradle-cache-cleaner.git</url>
+		<tag>core-1.0.0</tag>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/skjolber/gradle-cache-cleaner/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Travis</system>
+		<url>https://travis-ci.org/skjolber/gradle-cache-cleaner/builds/</url>
+	</ciManagement>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<gradle.version>6.1.1</gradle.version>
+
+		<!-- plugins -->
+		<build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
+		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+		<nexus-staging-maven-plugin.version>1.6.7</nexus-staging-maven-plugin.version>
+		<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
+		<maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+		<maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
+		<maven-dependency-plugin.version>2.10</maven-dependency-plugin.version>
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+		<maven-shade-plugin.version>3.1.1</maven-shade-plugin.version>
+		<maven-war-plugin.version>3.2.2</maven-war-plugin.version>
+		<owasp-dependency-check.version>5.2.4</owasp-dependency-check.version>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.gradle</groupId>
+			<artifactId>gradle-persistent-cache</artifactId>
+			<version>${gradle.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.gradle</groupId>
+			<artifactId>gradle-messaging</artifactId>
+			<version>${gradle.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.gradle</groupId>
+			<artifactId>gradle-files</artifactId>
+			<version>${gradle.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.gradle</groupId>
+			<artifactId>gradle-base-services</artifactId>
+			<version>${gradle.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>${nexus-staging-maven-plugin.version}</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>false</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>${maven-javadoc-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<useReleaseProfile>false</useReleaseProfile>
+					<releaseProfiles>release</releaseProfiles>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<!-- mvn -P release release:perform -->
+			<id>release</id>
+			<properties>
+				<!-- this is useful when the desired key is not the default (first) export 
+					GPG_KEY_NAME=ABCDEF01 -->
+				<gpg.executable>gpg</gpg.executable>
+				<gpg.keyname>${env.GPG_KEY_NAME}</gpg.keyname>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>${maven-gpg-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>mavenCentral</id>
+			<url>https://repo1.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>gradle</id>
+			<url>https://repo.gradle.org/gradle/libs-releases-local</url>
+		</repository>
+	</repositories>
+	
+</project>
