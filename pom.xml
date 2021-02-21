@@ -5,7 +5,7 @@
 	<artifactId>core</artifactId>
 	<name>Gradle cache cleaner</name>
 	<description>Clean Gradle caches</description>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<url>https://github.com/skjolber/gradle-cache-cleaner</url>
 
 	<organization>
