@@ -22,6 +22,10 @@ where `timestamp` is the UTC time in milliseconds. Files not accessed since the 
 
 Note that this process is not perfect, but works because of Gradles lenient nature.
 
+## Compatibility
+
+Tested with Gradle 6.x and 7.1.x
+
 ## License
 [Apache 2.0]
 

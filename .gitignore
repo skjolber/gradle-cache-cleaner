@@ -1,4 +1,6 @@
 
+.attach_pid*
+
 *.iml
 .gradle
 /local.properties
