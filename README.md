@@ -1,3 +1,5 @@
+Note: This repository is not relevant for the latest (>= 8) versions of Gradle - these have improved cache control settings.
+
 # gradle-cache-cleaner
 Reads the Gradle journal in `~/.gradle/caches/journal-1` to determine which files have not been used recently, and deletes them. 
 
